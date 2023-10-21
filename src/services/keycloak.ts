@@ -1,7 +1,7 @@
 import Keycloak from 'keycloak-js';
 
 export const keycloakInstance = new Keycloak({
-    url: 'http://localhost:8080',
-    realm: 'schoolrev',
-    clientId: 'school-admin-ui'
+    url: import.meta.env.VITE_KEYCLOAK_BASE_URL,
+    realm: import.meta.env.VITE_KEYCLOAK_REALM,
+    clientId: import.meta.env.VITE_KEYCLOAK_CLIENT_ID,
 });

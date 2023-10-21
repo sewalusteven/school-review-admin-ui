@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from "@/views/AboutView.vue";
-import {useUtilities} from "@/composables/useUtilities";
+import HomeView from '@/views/HomeView.vue'
+import Schools from "@/views/Schools.vue";
 import Default from "@/views/layouts/Default.vue";
+import Overview from "@/views/schools/Overview.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,24 +22,27 @@ const router = createRouter({
         },
         {
           path: 'schools',
-          name: 'schools',
-          component: AboutView
+          children: [
+            {
+              name:"schools",
+              path:"",
+              component: Schools
+            },
+            {
+              path:":id",
+              component: Overview
+            }
+          ]
         },
         {
           path: 'settings',
           name: 'settings',
-          component: AboutView
+          component: Schools
         },
       ]
     },
 
   ]
 })
-
-const { getToken } = useUtilities()
-
-const isAuthenticated =  () => {
-  return getToken() !== null;
-}
 
 export default router

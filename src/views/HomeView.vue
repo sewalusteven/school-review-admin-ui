@@ -4,8 +4,8 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
       <div class="rounded-lg p-5 bg-gradient-to-br from-indigo-800 to-sky-500 text-white shadow-md flex gap-2 justify-between items-center">
         <div class="flex flex-col gap-2">
-          <span class="mb-3 text-sm">Schools</span>
-          <span class="text-4xl font-bold">5,379</span>
+          <span class="mb-3 text-sm">No. Schools</span>
+          <span class="text-4xl font-bold">{{ new Intl.NumberFormat().format(totalSchools) }}</span>
         </div>
         <BuildingLibraryIcon class="w-20 h-20"/>
       </div>
@@ -37,9 +37,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import {reactive} from "vue";
+import {computed, reactive, watch} from "vue";
 import {BuildingLibraryIcon, StarIcon, UsersIcon} from "@heroicons/vue/24/outline";
+import {useAuthStore} from "@/stores/auth";
+import {useSchoolStore} from "@/stores/schools";
 
+const authStore = useAuthStore();
+const schoolStore =  useSchoolStore()
 interface dataObj {
   activeTab: string
 }
@@ -52,5 +56,18 @@ const changeTab = (tabId: string):void => {
   data.activeTab =  tabId;
 }
 
+const totalSchools = computed<number>(() => {
+  return schoolStore.schoolsResponse.totalItems;
+})
+
+const authResponse = computed(() => {
+  return authStore.response;
+})
+
+watch(authResponse, (val) => {
+  if(authResponse.value !== null){
+    schoolStore.getTotalNumberOfSchools()
+  }
+})
 
 </script>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute, useRouter} from "vue-router";
-import { BuildingLibraryIcon, ChartPieIcon, CogIcon, PowerIcon } from "@heroicons/vue/24/outline"
+import { BuildingLibraryIcon, ChartPieIcon, PowerIcon, FolderOpenIcon } from "@heroicons/vue/24/outline"
 import {onMounted, ref} from "vue";
 import {keycloakInstance} from "@/services/keycloak";
 
@@ -25,7 +25,7 @@ onMounted(() => {
 
 <template>
 <div class="p-3 flex-col flex lg:h-full">
-  <span class="uppercase font-medium mb-5">SCHOOLREV ADMIN</span>
+  <span class="uppercase font-medium mb-5"><img src="../../assets/logo.svg"></span>
   <div class="flex flex-col justify-between text-sm capitalize lg:h-full">
     <div class="flex flex-col gap-2 ">
       <button  @click="routeTo('/dashboard', 'dashboard')" class="hover:bg-blue-900 p-2 rounded-md flex gap-2 items-center" :class="(activeItem === 'dashboard')?'bg-blue-900':''">
@@ -37,8 +37,8 @@ onMounted(() => {
         <span>Schools</span>
       </button>
       <button @click="routeTo('/dashboard/settings','settings')" class="hover:bg-blue-900 p-2 rounded-md flex gap-2 items-center" :class="(activeItem === 'settings')?'bg-blue-900':''">
-        <CogIcon class="w-4 h-4" />
-        <span>Settings</span>
+        <FolderOpenIcon class="w-4 h-4" />
+        <span>Curriculums</span>
       </button>
     </div>
     <button @click="logout" class="hover:bg-blue-900 p-2 rounded-md flex gap-2 items-center">
