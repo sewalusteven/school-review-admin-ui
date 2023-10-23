@@ -1,6 +1,8 @@
+import {StarIcon as StarIconFull} from "@heroicons/vue/24/solid";
+import {StarIcon} from "@heroicons/vue/24/outline";
 
 export function useUtilities(){
-    const formatUgandanPhoneNumber = (phoneNumber:string): string =>{
+    const formatUgandanPhoneNumber = (phoneNumber:string): string => {
         // Remove any non-digit characters from the input
         phoneNumber = phoneNumber.replace(/\D/g, '');
 
@@ -17,6 +19,23 @@ export function useUtilities(){
         } else {
             // Invalid phone number format
             return 'Invalid phone number';
+        }
+    }
+
+    const renderStarRating = (rating:number, container:string) => {
+        const starContainer = document.getElementById(container);
+
+        for (let i = 1; i <= 5; i++) {
+            const star = document.createElement("span");
+            star.classList.add("star");
+
+            if (i <= rating) {
+                star.innerHTML = "&#9733;"; // Full star (Unicode for a filled star)
+            } else {
+                star.innerHTML = "&#9734;"; // Empty star (Unicode for an empty star)
+            }
+
+            starContainer?.appendChild(star);
         }
     }
 

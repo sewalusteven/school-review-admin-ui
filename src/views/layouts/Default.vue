@@ -8,6 +8,7 @@
         <div class="flex flex-col">
           <NavBar @toggle="sideMenuOpen = !sideMenuOpen" />
           <div class="container mx-auto p-5">
+            <BreadCrumbs />
             <RouterView />
           </div>
         </div>
@@ -21,6 +22,7 @@ import {RouterView} from "vue-router";
 import SideMenu from "@/views/layouts/SideMenu.vue";
 import NavBar from "@/views/layouts/NavBar.vue";
 import {ref} from "vue";
+import BreadCrumbs from "@/components/BreadCrumbs.vue";
 
 const sideMenuOpen =  ref<boolean>(true);
 </script>
